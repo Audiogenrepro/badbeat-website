@@ -28,6 +28,9 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Babel for JSX Transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <!-- Tailwind Config for Custom Font/Colors -->
     <script>
@@ -86,7 +89,7 @@
 <body>
     <div id="root"></div>
 
-    <script type="module">
+    <script type="text/babel" data-type="module">
         import React, { useState, useEffect } from 'react';
         import { createRoot } from 'react-dom/client';
         import { Play, Pause, MapPin, Mail, Instagram, Twitter, Facebook, ArrowRight, Menu, X, Music, Disc, ChevronDown, ExternalLink, Video, Headphones } from 'lucide-react';
