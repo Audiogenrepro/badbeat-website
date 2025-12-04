@@ -97,8 +97,6 @@
         const App = () => {
           const [isScrolled, setIsScrolled] = useState(false);
           const [isMenuOpen, setIsMenuOpen] = useState(false);
-          const [currentTrack, setCurrentTrack] = useState(null);
-          const [isPlaying, setIsPlaying] = useState(false);
 
           // Handle scroll effect for navbar
           useEffect(() => {
@@ -108,37 +106,6 @@
             window.addEventListener('scroll', handleScroll);
             return () => window.removeEventListener('scroll', handleScroll);
           }, []);
-
-          const togglePlay = (trackId) => {
-            if (currentTrack === trackId) {
-              setIsPlaying(!isPlaying);
-            } else {
-              setCurrentTrack(trackId);
-              setIsPlaying(true);
-            }
-          };
-
-          // Soundcloud Tracks (Simulated)
-          const tracks = [
-            { 
-              id: 0, 
-              title: "Badbeat & Marco Piangiamore", 
-              duration: "06:45", 
-              genre: "Techno / Unreleased",
-              url: "https://soundcloud.com/badbeat/badbeat-marco-piangiamore-1/s-jfhidofeCAv?si=5d51756e0fc0435eada966952d721d0b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
-            },
-            { id: 1, title: "Latest Mix 2024", duration: "1:02:30", genre: "Techno" },
-            { id: 2, title: "Terrace Afterhours Live", duration: "1:30:00", genre: "Live Set" },
-            { id: 3, title: "MNTRA Sessions", duration: "58:00", genre: "Minimal" },
-            { id: 4, title: "Underground Echoes", duration: "6:12", genre: "Techno" },
-          ];
-
-          // Top 3 Mixes
-          const topMixes = [
-            { id: 1, title: "Techno Taco Tuesday Live", genre: "Live Set", url: "https://soundcloud.com/badbeat" },
-            { id: 2, title: "MNTRA Showcase 2024", genre: "Minimal Techno", url: "https://soundcloud.com/badbeat" },
-            { id: 3, title: "Afterhours Sessions", genre: "Deep Tech", url: "https://soundcloud.com/badbeat" },
-          ];
 
           const tourDates = [
             { id: 1, date: "WEEKLY", venue: "Techno Taco Tuesday", city: "Las Vegas, NV", status: "Resident" },
@@ -169,9 +136,8 @@
               {/* Navigation */}
               <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 border-b border-white/10' : 'bg-transparent py-6'}`}>
                 <div className="container mx-auto px-6 flex justify-between items-center">
-                  {/* Logo */}
+                  {/* Logo - Removed Square 'b' frame */}
                   <div className="text-3xl font-black tracking-tighter cursor-pointer z-50 flex items-center gap-2" onClick={() => window.scrollTo(0,0)}>
-                     <div className="w-8 h-8 border-2 border-white flex items-center justify-center font-serif italic font-bold"></div>
                      <span>badbeat.</span>
                   </div>
 
@@ -240,7 +206,7 @@
                   </div>
 
                   <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-light tracking-wide">
-                    Techno Taco Tuesday Resident. MNTRA. TRONIC.
+                    MNTRA RECORDS. TRONIC.
                   </p>
                   <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
                     <a 
@@ -283,13 +249,13 @@
                       </h2>
                       <div className="space-y-6 text-gray-300 leading-relaxed text-lg font-light">
                         <p>
-                          Since 1999, BadBeat has camouflaged his way into the scene but is now making a breakthrough with an energetic force. Originally from CD Juarez, Mexico, and raised in Las Vegas, he is no stranger to nightlife culture.
+                          Bad Beat is a producer and selector shaped by long years in Las Vegas. Originating from Mexico, he works within stripped rhythm, repetition, and tension. His tracks focus on raw percussion, mechanical pulse, and subtle distortion, built to hold pressure on a floor.
                         </p>
                         <p>
-                          With a distinguishing sound and an ardent education of every genre of music, BadBeat does not sway away from his signature style of Techno.
+                          As a resident at Techno Taco Tuesday, he tests ideas directly in front of crowds, refining patterns through real impact rather than theory. His history includes sets alongside Adam Beyer, Richie Hawtin, Green Velvet, Joseph Capriati, Carl Cox, ihatemodels, Amelie Lens, Charlotte De Whitte and many more.
                         </p>
                         <p>
-                          Having an everlasting relationship with Techno music, he is well known in the Las Vegas music scene and internationally, as well as for his infamous party <span className="text-white font-bold">Techno Taco Tuesday</span>.
+                          Current work centers on studio output. New material is in motion, guided by reduction, groove architecture, and sound design aimed at clarity, weight, and movement.
                         </p>
                       </div>
                       
@@ -308,48 +274,54 @@
               <section id="visuals" className="py-24 bg-zinc-950 border-t border-white/10">
                 <div className="container mx-auto px-6">
                     <div className="mb-12">
-                        <p className="text-gray-500 font-bold tracking-widest mb-2 uppercase">Live Sets & Visuals</p>
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white">Experience the Sound</h2>
+                        <p className="text-gray-500 font-bold tracking-widest mb-2 uppercase">Latest Videos</p>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white">Live Sets and Visuals</h2>
                     </div>
                     
                     <div className="grid md:grid-cols-3 gap-6">
-                        {/* Video Placeholder 1 */}
-                        <div className="group relative aspect-[9/16] md:aspect-video bg-zinc-900 border border-white/10 hover:border-white/50 transition-all cursor-pointer overflow-hidden">
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <Video size={48} className="text-gray-600 group-hover:text-white transition-colors"/>
-                            </div>
-                            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=2079&auto=format&fit=crop" className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity grayscale" alt="Live Set Video" />
-                            <div className="absolute bottom-0 left-0 p-4 w-full bg-gradient-to-t from-black to-transparent">
-                                <h4 className="font-bold uppercase tracking-wider">Live @ Pachi Pachi</h4>
-                            </div>
+                        {/* YOUTUBE EMBED 1 
+                           Replace the 'src' link with your video embed link.
+                           Find the Video on YouTube -> Share -> Embed -> Copy the 'src' url.
+                        */}
+                        <div className="aspect-video bg-zinc-900 border border-white/10">
+                            <iframe 
+                                className="w-full h-full"
+                                src="https://youtu.be/gZCyAk2_cVU?si=OIEnkCcHX59U7GyE" 
+                                title="YouTube video player" 
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowFullScreen>
+                            </iframe>
                         </div>
 
-                        {/* Video Placeholder 2 */}
-                        <div className="group relative aspect-[9/16] md:aspect-video bg-zinc-900 border border-white/10 hover:border-white/50 transition-all cursor-pointer overflow-hidden">
-                             <div className="absolute inset-0 flex items-center justify-center">
-                                <Video size={48} className="text-gray-600 group-hover:text-white transition-colors"/>
-                            </div>
-                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity grayscale" alt="Live Set Video" />
-                            <div className="absolute bottom-0 left-0 p-4 w-full bg-gradient-to-t from-black to-transparent">
-                                <h4 className="font-bold uppercase tracking-wider">Techno Taco Tuesday</h4>
-                            </div>
+                        {/* YOUTUBE EMBED 2 */}
+                        <div className="aspect-video bg-zinc-900 border border-white/10">
+                            <iframe 
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2?theme=dark&color=white" 
+                                title="YouTube video player" 
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowFullScreen>
+                            </iframe>
                         </div>
 
-                         {/* Video Placeholder 3 */}
-                         <div className="group relative aspect-[9/16] md:aspect-video bg-zinc-900 border border-white/10 hover:border-white/50 transition-all cursor-pointer overflow-hidden">
-                             <div className="absolute inset-0 flex items-center justify-center">
-                                <Video size={48} className="text-gray-600 group-hover:text-white transition-colors"/>
-                            </div>
-                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity grayscale" alt="Live Set Video" />
-                            <div className="absolute bottom-0 left-0 p-4 w-full bg-gradient-to-t from-black to-transparent">
-                                <h4 className="font-bold uppercase tracking-wider">Underground Sessions</h4>
-                            </div>
+                         {/* YOUTUBE EMBED 3 */}
+                         <div className="aspect-video bg-zinc-900 border border-white/10">
+                            <iframe 
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3?theme=dark&color=white" 
+                                title="YouTube video player" 
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowFullScreen>
+                            </iframe>
                         </div>
                     </div>
                 </div>
               </section>
 
-              {/* Music Section */}
+              {/* Music Section with Soundcloud Embeds */}
               <section id="music" className="py-24 bg-black border-t border-white/10">
                 <div className="container mx-auto px-6">
                   <div className="flex flex-col md:flex-row justify-between items-end mb-16">
@@ -362,85 +334,45 @@
                     </a>
                   </div>
 
-                  <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                    {/* Visual */}
-                    <div className="w-full aspect-square bg-zinc-900 border border-white/10 flex items-center justify-center relative overflow-hidden group">
-                       <div className={`absolute inset-0 rounded-full border-[60px] border-zinc-800 scale-90 ${isPlaying ? 'animate-spin-slow' : ''} transition-all duration-1000 opacity-20`}></div>
-                       <Disc size={120} className={`text-zinc-800 ${isPlaying ? 'animate-spin-slow' : ''}`} />
-                       
-                       <a href={socialLinks.soundcloud} target="_blank" rel="noreferrer" className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                         <p className="font-bold tracking-widest uppercase mb-2">Listen on Soundcloud</p>
-                         <ExternalLink size={32} />
-                       </a>
-                    </div>
-
-                    {/* Tracklist */}
-                    <div className="flex flex-col justify-center space-y-2">
-                      {tracks.map((track) => (
-                        <div 
-                          key={track.id}
-                          onClick={() => togglePlay(track.id)}
-                          className={`p-6 border-b border-white/10 transition-all cursor-pointer group hover:bg-white/5 relative`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-6">
-                              <button className={`w-12 h-12 flex items-center justify-center transition-colors border border-white/20 group-hover:border-white`}>
-                                {currentTrack === track.id && isPlaying ? (
-                                  <Pause size={20} fill="currentColor" />
-                                ) : (
-                                  <Play size={20} fill="currentColor" className="ml-1" />
-                                )}
-                              </button>
-                              <div>
-                                <h4 className={`font-bold text-xl uppercase tracking-wide ${currentTrack === track.id ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}>
-                                  {track.title}
-                                </h4>
-                                <p className="text-xs font-mono text-gray-500 uppercase mt-1">{track.genre}</p>
-                              </div>
-                            </div>
-                            
-                            <div className="flex items-center gap-4">
-                              {track.url && (
-                                <a 
-                                  href={track.url} 
-                                  target="_blank" 
-                                  rel="noreferrer"
-                                  onClick={(e) => e.stopPropagation()} 
-                                  className="p-2 text-gray-500 hover:text-white hover:scale-110 transition-all"
-                                  title="Listen on SoundCloud"
-                                >
-                                  <ExternalLink size={20} />
-                                </a>
-                              )}
-                              <span className="text-sm font-mono text-gray-500">{track.duration}</span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  {/* Main Featured Track - SoundCloud Embed */}
+                  <div className="mb-16">
+                    {/* SOUNDCLOUD MAIN PLAYER
+                       Go to SoundCloud -> Share -> Embed -> Copy the code. 
+                       Extract the 'src' link and paste it below.
+                    */}
+                    <iframe 
+                        width="100%" 
+                        height="166" 
+                        scrolling="no" 
+                        frameBorder="no" 
+                        allow="autoplay" 
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2152685660&color=%230a0a0a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+                    </iframe>
                   </div>
                   
-                  {/* Top Mixes Section */}
+                  {/* Top Mixes Section - SoundCloud Embeds */}
                   <div className="pt-12 border-t border-white/10">
                     <h3 className="text-2xl font-black uppercase mb-8">Select Mixes</h3>
-                    <div className="grid md:grid-cols-3 gap-6">
-                        {topMixes.map((mix) => (
-                            <div key={mix.id} className="group relative bg-zinc-900 border border-white/10 p-6 flex flex-col justify-between hover:border-white transition-all min-h-[200px]">
-                                <div>
-                                    <Headphones className="mb-4 text-gray-500 group-hover:text-white transition-colors" size={32} />
-                                    <h4 className="text-xl font-bold uppercase mb-2">{mix.title}</h4>
-                                    <p className="text-xs text-gray-400 uppercase tracking-widest">{mix.genre}</p>
-                                </div>
-                                <a 
-                                    href={mix.url} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    className="mt-6 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors"
-                                >
-                                    Listen <ArrowRight size={16} />
-                                </a>
-                            </div>
-                        ))}
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* Mix 1 */}
+                        <iframe 
+                            width="100%" 
+                            height="300" 
+                            scrolling="no" 
+                            frameBorder="no" 
+                            allow="autoplay" 
+                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2141065341&color=%230a0a0a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+                        </iframe>
+
+                        {/* Mix 2 */}
+                        <iframe 
+                            width="100%" 
+                            height="300" 
+                            scrolling="no" 
+                            frameBorder="no" 
+                            allow="autoplay" 
+                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A1903492582%3Fsecret_token%3Ds-K2SbnhU6OrT&color=%230a0a0a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+                        </iframe>
                     </div>
                   </div>
                 </div>
@@ -453,7 +385,7 @@
                     <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter">
                       Upcoming Dates
                     </h2>
-                    <p className="text-gray-500 font-mono uppercase tracking-widest">Catch the vibe live</p>
+                    <p className="text-gray-500 font-mono uppercase tracking-widest">Catch badbeat live</p>
                   </div>
 
                   <div className="max-w-5xl mx-auto border-t border-black">
